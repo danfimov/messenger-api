@@ -11,7 +11,7 @@ FROM snakepacker/python:all as builder
 # Target folder should be the same on the build stage and on the target stage
 RUN python3.9 -m venv /usr/share/python3/app
 
-ADD ../src /tmp/messenger
+ADD ./src /tmp/messenger
 RUN /usr/share/python3/app/bin/pip install -U '/tmp/messenger'
 
 # Will be find required system libraries and their packages
