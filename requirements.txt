@@ -1,0 +1,9 @@
+setuptools~=57.0.0
+aiohttp~=3.8.1
+pydantic~=1.8.2
+SQLAlchemy~=1.4.27
+aiopg~=1.3.3
+alembic~=1.7.5
+ConfigArgParse~=1.5.3
+pytest~=6.2.5
+yarl~=1.7.2

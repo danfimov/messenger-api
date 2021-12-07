@@ -1,0 +1,9 @@
+build-and-test:
+  stage: build
+  image: docker:latest
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE .
+    - docker run -d -p 8080:8080 $CI_REGISTRY_IMAGE
+    - pip3 install -r ./tests/requirements.txt
+    - sleep 5
+    - /home/runner/.local/bin/pytest ./tests/
