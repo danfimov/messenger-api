@@ -11,7 +11,9 @@ jobs:
         run: docker-compose -f docker/test.docker-compose.yml up -d
       - name: Check running containers
         run: docker ps
-      - name: Run test suite
+      - name: Install tests dependencies
+        run: docker-compose exec tests pip install pytest
+      - name: Run tests
         run: docker exec tests pytest tests
 
   test-linter:
