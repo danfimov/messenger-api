@@ -30,7 +30,8 @@ jobs:
           postgresql user: username
           postgresql password: hackme
       - name: Set path to messenger
-        run: "export PYTHONPATH=$PYTHONPATH:/home/runner/work/messenger-api/messenger-api/src"
+#        run: "export PYTHONPATH=$PYTHONPATH:/home/runner/work/messenger-api/messenger-api/src"
+        run:  echo "::add-path::/home/runner/work/messenger-api/messenger-api/src"
       - name: Test with pytest
         run: pytest
 
