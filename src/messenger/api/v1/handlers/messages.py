@@ -5,7 +5,8 @@ from aiohttp.web import json_response, Response
 from .base import BaseView, db_required
 from ..errors import ChatNotFound, UserNotFound, BadParametersError
 
-from ..models import ChatCreateMessageRequest, ChatCreateMessageResponse, Message, ChatGetMessagesResponse, \
+from ..models import ChatCreateMessageRequest, ChatCreateMessageResponse, \
+    Message, ChatGetMessagesResponse, \
     ChatGetMessagesRequest
 
 
@@ -26,7 +27,8 @@ class MessagesView(BaseView):
             return BadParametersError()
 
         if await self.db_manager.is_chat_id_exist(parsed_request.chat_id):
-            if await self.db_manager.is_rel_id_in_chat(parsed_request.chat_id, parsed_request.user_id):
+            if await self.db_manager.is_rel_id_in_chat(parsed_request.chat_id,
+                                                       parsed_request.user_id):
                 message_id = await self.db_manager.create_message(
                     parsed_request.message,
                     parsed_request.chat_id,
@@ -66,7 +68,7 @@ class MessagesView(BaseView):
                 messages = [
                     Message(text=text) for text in messages
                 ]
-                iterator = parsed_request.from_ if parsed_request.from_ else 0
+                iterator = int(parsed_request.from_) if parsed_request.from_ else 0
                 iterator = {"iterator": str(len(messages) + iterator)}
             else:
                 messages = []
