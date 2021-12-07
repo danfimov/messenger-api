@@ -107,10 +107,12 @@ class TaskStatus(IntEnum):
 class SearchTaskStatusResponse(BaseModel):
     status: str
 
+
 class SearchResultRequest(BaseModel):
     limit: int = Field(gt=0, lt=1000)
     from_: Optional[int] = Field(alias='from', gt=-1)
     task_id: str
+
 
 class SearchResultResponse(BaseModel):
     messages: list

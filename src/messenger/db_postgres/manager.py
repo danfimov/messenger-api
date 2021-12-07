@@ -272,8 +272,7 @@ class DataBaseManager:
             .filter(tasks.c.created_at > oldest_created_at).returning(
             tasks.c.task_id)
         async with self.engine.acquire() as conn:
-            returning_value = await conn.execute(query)
-            parsed_value = await returning_value.fetchall()
+            await conn.execute(query)
 
     async def restart_waiting_tasks(self):
         query = update(tasks) \
