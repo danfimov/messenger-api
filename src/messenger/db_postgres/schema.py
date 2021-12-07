@@ -1,7 +1,8 @@
 from uuid import uuid1
 from datetime import datetime
-from sqlalchemy import Table, String, MetaData, Column, DateTime, Text, BigInteger, ARRAY, Integer
-from ..api.v1.models import TaskStatus
+from sqlalchemy import Table, String, MetaData, Column, DateTime, Text, \
+    BigInteger, ARRAY, Integer
+from messenger.api.v1.models import TaskStatus
 
 # SQLAlchemy рекомендует использовать единый формат для генерации названий для
 # индексов и внешних ключей.

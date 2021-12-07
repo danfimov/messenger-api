@@ -29,3 +29,4 @@ api_logs.txt
 .pytest_cache/
 .coverage
 /htmlcov/
+.mypy_cache/

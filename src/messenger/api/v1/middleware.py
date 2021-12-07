@@ -30,9 +30,9 @@ async def authorization(request: Request, handler: Callable):
                     'PingView']
 
     request.app['log_manager'].logger.debug(
-        f'Authorization process has been activated.')
+        'Authorization process has been activated.')
     if handler.__name__ in not_required or environ.get("AUTH_DISABLED", False):
-        request.app['log_manager'].logger.debug(f'Authorization skipped.')
+        request.app['log_manager'].logger.debug('Authorization skipped.')
         return await handler(request)
     else:
         session_id = request.headers.get('session_id')
@@ -41,10 +41,10 @@ async def authorization(request: Request, handler: Callable):
                 session_id)
             if is_correct:
                 request.app['log_manager'].logger.debug(
-                    f'Authorization passed.')
+                    'Authorization passed.')
                 return await handler(request)
             else:
-                request.app['log_manager'].logger.debug(f'User not found.')
+                request.app['log_manager'].logger.debug('User not found.')
                 return UserNotFound()
-        request.app['log_manager'].logger.debug(f'Authorization required.')
+        request.app['log_manager'].logger.debug('Authorization required.')
         return AuthorizationRequired()

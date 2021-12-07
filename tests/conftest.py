@@ -65,7 +65,7 @@ def migrated_postgres(alembic_config: Config):
 
 
 @pytest.fixture
-async def api_client(aiohttp_client, migrated_postgres):
+async def api_client(aiohttp_client, postgres):
     app = create_app()
     client = await aiohttp_client(app)
     try:

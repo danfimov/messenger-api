@@ -1,7 +1,7 @@
-alembic==1.7.4
-messenger==1.0
-pytest==6.2.5
-SQLAlchemy_Utils==0.37.9
-tests==0.007
-yarl==1.7.0
-flake8==4.0.1
+alembic~=1.7.4
+pytest~=6.2.5
+SQLAlchemy_Utils~=0.37.9
+yarl~=1.7.0
+flake8~=4.0.1
+pytest-coverage
+pytest-aiohttp
