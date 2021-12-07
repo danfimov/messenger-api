@@ -22,7 +22,7 @@ services:
   tests:
     build:
       context: ..
-      dockerfile: docker/app.dockerfile
+      dockerfile: docker/test.dockerfile
     container_name: "tests"
     depends_on:
       db:
