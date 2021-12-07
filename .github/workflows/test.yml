@@ -3,28 +3,16 @@ name: Push tests
 on: [push]
 
 jobs:
-#  test-pytest:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#      - name: Build the docker-compose
-#        run: docker-compose -f docker/test.docker-compose.yml up --build -d
-
   test-pytest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r src/requirements.txt
-          pip install -r tests/requirements.txt
-      - name: Test with pytest
-        run: pytest
+      - name: Build the docker-compose
+        run: docker-compose -f docker/test.docker-compose.yml up --build -d
+      - name: Check running containers
+        run: docker ps
+      - name: Run test suite
+        run: docker exec docker_tests pytest
 
 
   test-linter:
