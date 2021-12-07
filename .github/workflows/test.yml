@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the docker-compose
-        run: docker-compose -f docker/test.docker-compose.yml up --build
+        run: docker-compose -f docker/test.docker-compose.yml up --build -d
 
   test-linter:
     runs-on: ubuntu-latest
