@@ -12,7 +12,7 @@ jobs:
       - name: Check running containers
         run: docker ps
       - name: Install tests dependencies
-        run: docker-compose exec tests pip install pytest
+        run: docker-compose exec docker_tests pip install pytest
       - name: Run tests
         run: docker exec tests pytest tests
 
