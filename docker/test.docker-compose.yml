@@ -23,7 +23,7 @@ services:
     build:
       context: ..
       dockerfile: docker/app.dockerfile
-    container_name: "tests"
+    container_name: "api"
     depends_on:
       db:
         condition: service_healthy

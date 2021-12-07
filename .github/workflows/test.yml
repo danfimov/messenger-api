@@ -22,18 +22,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r src/requirements.txt
-          pip install src/
           pip install -r tests/requirements.txt
+      - name: Install my package
+        run: pip install src/
       - uses: harmon758/postgresql-action@v1
         with:
           postgresql version: '13'
           postgresql db: messenger
           postgresql user: username
           postgresql password: hackme
-      - name: Set path to messenger
-#        run: "export PYTHONPATH=$PYTHONPATH:/home/runner/work/messenger-api/messenger-api/src"
-#        run:  echo "::add-path::/home/runner/work/messenger-api/messenger-api/src"
-        run: echo "/home/runner/work/messenger-api/messenger-api/src" >> $GITHUB_PATH
       - name: Test with pytest
         run: pytest
 
