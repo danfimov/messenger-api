@@ -77,7 +77,6 @@ class MessagesView(BaseView):
 
             response_obj = ChatGetMessagesResponse.parse_obj(
                 {'messages': messages, 'next': iterator})
-            return json_response(response_obj.dict(exclude_none=True),
-                                 status=HTTPStatus.OK)
+            return json_response(response_obj.dict(exclude_none=True))
         else:
             return ChatNotFound()

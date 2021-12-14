@@ -1,4 +1,3 @@
-from http import HTTPStatus
 from aiohttp.web import json_response, Response
 
 from .base import BaseView, db_required
@@ -12,4 +11,4 @@ class QuitView(BaseView):
     async def post(self) -> Response:
         session_id = self.request.headers.get('session_id')
         await self.db_manager.delete_session(session_id)
-        return json_response(QuitResponse().dict(), status=HTTPStatus.OK)
+        return json_response(QuitResponse().dict())

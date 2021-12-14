@@ -1,4 +1,3 @@
-from http import HTTPStatus
 from aiohttp.web import json_response, Response
 from .base import BaseView
 from ..models import SearchBeginRequest, SearchBeginResponse, \
@@ -18,8 +17,7 @@ class SearchBeginView(BaseView):
         user_id = await self.db_manager.get_user_id_from_session(session_id)
         new_task_id = await self.db_manager.create_task(
             message=parsed_data.message, user_id=user_id)
-        return json_response(SearchBeginResponse(task_id=new_task_id).dict(),
-                             status=HTTPStatus.OK)
+        return json_response(SearchBeginResponse(task_id=new_task_id).dict())
 
 
 class SearchTaskStatusView(BaseView):
@@ -42,24 +40,19 @@ class SearchTaskStatusView(BaseView):
             return TaskNotFound()
         elif task_status == TaskStatus.waiting:
             return json_response(
-                SearchTaskStatusResponse(status='waiting').dict(),
-                status=HTTPStatus.OK)
+                SearchTaskStatusResponse(status='waiting'))
         elif task_status == TaskStatus.in_progress:
             return json_response(
-                SearchTaskStatusResponse(status='in-progress').dict(),
-                status=HTTPStatus.OK)
+                SearchTaskStatusResponse(status='in-progress').dict())
         elif task_status == TaskStatus.done:
             return json_response(
-                SearchTaskStatusResponse(status='done').dict(),
-                status=HTTPStatus.OK)
+                SearchTaskStatusResponse(status='done').dict())
         elif task_status == TaskStatus.failed:
             return json_response(
-                SearchTaskStatusResponse(status='failed').dict(),
-                status=HTTPStatus.OK)
+                SearchTaskStatusResponse(status='failed').dict())
         else:
             return json_response(
-                SearchTaskStatusResponse(status=task_status).dict(),
-                status=HTTPStatus.OK)
+                SearchTaskStatusResponse(status=task_status).dict())
 
 
 class SearchResultView(BaseView):
@@ -107,9 +100,7 @@ class SearchResultView(BaseView):
                 SearchResultResponse(
                     messages=messages,
                     next=iterator
-                ).dict(),
-                status=HTTPStatus.OK
-            )
+                ).dict())
 
         elif status == TaskStatus.in_progress:
             return BadParametersError('task-in-progress')

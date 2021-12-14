@@ -1,4 +1,3 @@
-from http import HTTPStatus
 from aiohttp.web import json_response
 from aiohttp_pydantic.oas.typing import r200
 from aiohttp_pydantic import PydanticView
@@ -17,4 +16,4 @@ class PingView(PydanticView):
             200: App is online
             500: App is down
         """
-        return json_response(AppOnlineResponse().dict(), status=HTTPStatus.OK)
+        return json_response(AppOnlineResponse().dict())

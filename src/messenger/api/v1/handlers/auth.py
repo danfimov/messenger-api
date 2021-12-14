@@ -1,4 +1,3 @@
-from http import HTTPStatus
 from aiohttp.web import json_response
 from aiohttp_pydantic.oas.typing import r200, r401
 from typing import Union

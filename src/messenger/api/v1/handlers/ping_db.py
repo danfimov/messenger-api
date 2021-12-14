@@ -22,8 +22,7 @@ class PingDbView(PydanticView, BaseView):
             503: Database is down
         """
         if await self.request.app['db_manager'].ping_db():
-            return json_response(DatabaseOnlineResponse().dict(),
-                                 status=HTTPStatus.OK)
+            return json_response(DatabaseOnlineResponse().dict())
         else:
             return json_response(DatabaseOfflineResponse().dict(),
                                  status=HTTPStatus.SERVICE_UNAVAILABLE)
