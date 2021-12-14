@@ -15,5 +15,6 @@ class CreateChatView(BaseView):
         parsed_data = ChatCreateRequest.parse_obj(body)
         new_chat_id = await self.db_manager.create_chat(
             parsed_data.chat_name)
-        return json_response(ChatCreateResponse(chat_id=str(new_chat_id)).dict(),
-                             status=HTTPStatus.CREATED)
+        return json_response(
+            ChatCreateResponse(chat_id=str(new_chat_id)).dict(),
+            status=HTTPStatus.CREATED)

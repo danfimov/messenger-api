@@ -1,11 +1,23 @@
 from typing import Optional
 from pydantic import Field, BaseModel, StrictStr
 from enum import IntEnum
+from typing import ClassVar
+from http import HTTPStatus
+
+
+class DefaultResponse(BaseModel):
+    status: ClassVar[int] = Field(default=HTTPStatus.OK)
 
 
 class DefaultErrorResponse(BaseModel):
     message: str = Field(description='error reason')
     info: Optional[str] = Field(description='addition information')
+    status: ClassVar[int] = Field(default=HTTPStatus.BAD_REQUEST)
+
+
+class InvalidLoginPassword(DefaultErrorResponse):
+    message = 'wrong-login-or-password'
+    status = HTTPStatus.UNAUTHORIZED
 
 
 class ChatJoinRequest(BaseModel):
@@ -78,7 +90,7 @@ class AuthUserRequest(BaseModel):
 
 
 class AuthUserResponse(BaseModel):
-    session_id: str
+    session_id: str = Field(description='unique session id')
 
 
 class QuitResponse(BaseModel):

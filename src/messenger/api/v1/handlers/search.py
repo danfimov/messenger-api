@@ -33,8 +33,10 @@ class SearchTaskStatusView(BaseView):
         session_id = self.request.headers.get('session_id')
         user_id = await self.db_manager.get_user_id_from_session(session_id)
 
-        task_status = await self.db_manager.get_task_status(user_id=user_id,
-                                                            task_id=parsed_data.task_id)
+        task_status = await self.db_manager.get_task_status(
+            user_id=user_id,
+            task_id=parsed_data.task_id
+        )
         print(type(task_status))
         if task_status is None:
             return TaskNotFound()

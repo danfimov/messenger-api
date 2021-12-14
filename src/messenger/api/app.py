@@ -26,7 +26,8 @@ async def task_cleaner(app) -> None:
             await app['db_manager'].delete_old_tasks()
             await sleep(60)  # чистим список задач каждую минуту
     except Exception as e:
-        app['log_manager'].logger.error(f'Task cleaner is stopped with an error: {e}')
+        app['log_manager'].logger\
+            .error(f'Task cleaner is stopped with an error: {e}')
 
 
 async def task_executor(app) -> None:
@@ -44,10 +45,14 @@ async def task_executor(app) -> None:
                     new_status=TaskStatus.in_progress
                 )
 
-                chats = [elem[0] for elem in await app['db_manager'].get_all_user_chats(user_id=user_id)]
+                chats = [elem[0] for elem in
+                         await app['db_manager'].get_all_user_chats(
+                             user_id=user_id)]
                 if chats:
                     messages = [
-                        elem[0] for elem in await app['db_manager'].find_messages(chats=chats, search_text=search_text)
+                        elem[0] for elem in
+                        await app['db_manager'].find_messages(
+                            chats=chats, search_text=search_text)
                     ]
                     await app['db_manager'].add_finding_messages(
                         task_id=task_id,
@@ -59,7 +64,8 @@ async def task_executor(app) -> None:
                     new_status=TaskStatus.done
                 )
     except Exception as e:
-        app['log_manager'].logger.error(f'Task executor is stopped with an error: {e.args}')
+        app['log_manager'].logger.\
+            error(f'Task executor is stopped with an error: {e.args}')
 
 
 async def start_task_processing(app) -> None:

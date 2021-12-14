@@ -68,7 +68,8 @@ class MessagesView(BaseView):
                 messages = [
                     Message(text=text) for text in messages
                 ]
-                iterator = int(parsed_request.from_) if parsed_request.from_ else 0
+                iterator = int(parsed_request.from_) \
+                    if parsed_request.from_ else 0
                 iterator = {"iterator": str(len(messages) + iterator)}
             else:
                 messages = []

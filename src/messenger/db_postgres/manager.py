@@ -86,8 +86,8 @@ class DataBaseManager:
         """
         Проверяет наличие связи между rel_id и чатом.
 
-        (На уровне бизнес-логики: проверяет наличие пользователя в чате, так как мы отдаем rel_id при добалении
-        пользователя в чат)
+        (На уровне бизнес-логики: проверяет наличие пользователя в чате,
+        так как мы отдаем rel_id при добалении пользователя в чат)
         """
         query = select(users_chats_relations) \
             .where(and_(users_chats_relations.c.chat_id == chat_id,
@@ -128,7 +128,8 @@ class DataBaseManager:
         Создаёт чат, используя введенное пользователем имя чата.
         """
         query = insert(chats) \
-            .values({'chat_name': chat_name, 'created_at': datetime.utcnow()}) \
+            .values({'chat_name': chat_name,
+                     'created_at': datetime.utcnow()}) \
             .returning(chats.c.chat_id)
         async with self.engine.acquire() as conn:
             returning_value = await conn.execute(query)
@@ -141,7 +142,8 @@ class DataBaseManager:
         Помещает сообщение пользователя в соответствующий чат
         """
         query = insert(messages) \
-            .values({'text': text, 'chat_from': chat_id, 'user_from': user_id}) \
+            .values({'text': text, 'chat_from': chat_id,
+                     'user_from': user_id}) \
             .returning(messages.c.message_id)
         async with self.engine.acquire() as conn:
             returning_value = await conn.execute(query)
@@ -184,11 +186,14 @@ class DataBaseManager:
 
     async def authentication(self, user_name: str, password: str) -> str:
         """
-        Проверяет данные для входа. При успешном нахождении данных в бд, возращает user_id, в противном случае - None
+        Проверяет данные для входа.
+        При успешном нахождении данных в бд,
+        возращает user_id, в противном случае - None
         """
         query = select(users.c.user_id) \
             .where(
-            and_(users.c.user_name == user_name, users.c.password == password)) \
+            and_(users.c.user_name == user_name,
+                 users.c.password == password)) \
             .limit(1)
         async with self.engine.acquire() as conn:
             returning_value = await conn.execute(query)

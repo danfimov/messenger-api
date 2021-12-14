@@ -51,7 +51,8 @@ users_chats_relations = Table(
 sessions = Table(
     "sessions",
     metadata,
-    Column('rel_id', BigInteger, autoincrement=True, nullable=False, primary_key=True),
+    Column('rel_id', BigInteger, autoincrement=True, nullable=False,
+           primary_key=True),
     Column("user_id", String, nullable=False),
     Column('session_id', String, default=uuid1, nullable=False)
 )

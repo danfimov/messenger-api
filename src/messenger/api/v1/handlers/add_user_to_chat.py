@@ -19,7 +19,8 @@ class AddUserToChatView(BaseView):
             user_id=user_id,
             **body,
         )
-        if not await self.db_manager.is_user_id_in_chat(parsed_request.chat_id, user_id):
+        if not await self.db_manager.is_user_id_in_chat(
+                parsed_request.chat_id, user_id):
             if await self.db_manager.is_chat_id_exist(parsed_request.chat_id):
                 user_id = await self.db_manager.add_user_to_chat(
                     chat_id=parsed_request.chat_id,
