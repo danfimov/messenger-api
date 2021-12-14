@@ -24,5 +24,7 @@ jobs:
           postgresql db: messenger
           postgresql user: username
           postgresql password: hackme
-      - name: Test with pytest
+      - name: Run tests
         run: pytest
+      - name: Check coverage
+        run: coverage report --fail-under=80
