@@ -56,11 +56,11 @@ class AppOnlineResponse(BaseModel):
 
 
 class DatabaseOnlineResponse(BaseModel):
-    message: str = 'database-is-online'
+    message: str = 'database-is-up'
 
 
 class DatabaseOfflineResponse(BaseModel):
-    message: str = 'database-is-online'
+    message: str = 'database-is-down'
 
 
 class CreateUserRequest(BaseModel):

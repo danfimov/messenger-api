@@ -1,5 +1,6 @@
 from aiohttp.web import Application
 from asyncio import create_task, sleep
+from aiohttp_pydantic import oas
 
 from messenger.api.log import LogManager
 from messenger.api.v1.handlers import HANDLERS
@@ -84,9 +85,12 @@ def create_app() -> Application:
         logger=logger
     )
 
-    app['log_manager'] = log_manager
-
     setup_routes(app)
+
+    oas.setup(app, url_prefix='/spec-api', title_spec="Messenger API",
+              version_spec="0.0.1")
+
+    app['log_manager'] = log_manager
 
     app['SERVICE_HOST'] = '0.0.0.0'
     app['SERVICE_PORT'] = '8080'

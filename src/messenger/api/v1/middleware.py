@@ -27,11 +27,14 @@ async def error_solving(request: Request, handler: Callable) -> Response:
 @middleware
 async def authorization(request: Request, handler: Callable):
     not_required = ['AuthenticationView', 'RegistrationView', 'PingDbView',
-                    'PingView']
+                    'PingView', 'oas_ui', 'get_oas', 'oas_ui', '_handle']
 
     request.app['log_manager'].logger.debug(
         'Authorization process has been activated.')
-    if handler.__name__ in not_required or environ.get("AUTH_DISABLED", False):
+
+    request.app['log_manager'].logger.debug(f'{handler.__name__=}')
+    if (handler.__name__ in not_required) or \
+            environ.get("AUTH_DISABLED", False):
         request.app['log_manager'].logger.debug('Authorization skipped.')
         return await handler(request)
     else:

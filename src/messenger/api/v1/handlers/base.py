@@ -1,7 +1,7 @@
 from aiohttp.web import View, Request
 from typing import Callable
-from ....db_postgres.manager import DataBaseManager
-from ....api.v1.errors import BadParametersError
+from messenger.db_postgres.manager import DataBaseManager
+from messenger.api.v1.errors import BadParametersError
 
 
 def db_required():
