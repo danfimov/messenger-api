@@ -1,6 +1,6 @@
 # Бэкенд для мессенджера
 
-[![Flake8](https://github.com/LoveSolaristics/messenger-api/actions/workflows/flake8.yml/badge.svg?branch=master)](https://github.com/LoveSolaristics/messenger-api/actions/workflows/flake8.yml)
+[![Ruff](https://github.com/LoveSolaristics/messenger-api/actions/workflows/flake8.yml/badge.svg?branch=master)](https://github.com/LoveSolaristics/messenger-api/actions/workflows/linters.yml)
 [![Pytest](https://github.com/LoveSolaristics/messenger-api/actions/workflows/pytest.yml/badge.svg?branch=master)](https://github.com/LoveSolaristics/messenger-api/actions/workflows/pytest.yml)
 
 Это учебный проект, начало которому было положено в ШБР Яндекса. 
@@ -21,7 +21,7 @@
 2. На данный момент валидация запросов осуществляется с помощью библиотеки `pydantic`. 
 3. Взаимодействие с базой данных `PostgreSQL` происходит посредством `SQLAlchemy ORM`. 
 4. Асинхронные таски используют библиотеку `asyncio`.
-5. Настроены автотесты (`pytest`) и проверка процента покрытия кода тестами, а также запуск линтера (`flake8`) при коммите.
+5. Настроены автотесты (`pytest`) и проверка процента покрытия кода тестами, а также запуск линтера (`ruff`) при коммите.
 
 ## Локальный запуск
 

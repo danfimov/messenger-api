@@ -1,4 +1,4 @@
-name: Tests
+name: Linters
 
 on:
   push:
@@ -8,26 +8,9 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  test:
-    name: Tests
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:14
-        env:
-          POSTGRES_DB: messenger
-          POSTGRES_USER: username
-          POSTGRES_PASSWORD: hackme
-          POSTGRES_HOST: postgres
-          POSTGRES_PORT: 5432
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
 
     steps:
       - uses: actions/checkout@v3
@@ -80,5 +63,5 @@ jobs:
         run: poetry install --no-interaction --no-root
         if: steps.cache-deps.outputs.cache-hit != 'true'
 
-      - name: Run tests
-        run: poetry run python3 -m pytest --verbosity=2 --showlocals --log-level=DEBUG
+      - name: Lint code
+        run: make lint
