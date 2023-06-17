@@ -61,7 +61,7 @@ run:  ##@Application Run application server
 	poetry run python3 -m $(APPLICATION_NAME)
 
 revision:  ##@Database Create new revision file automatically with prefix (ex. 2022_01_01_14cs34f_message.py)
-	cd $(APPLICATION_NAME)/db && alembic revision --autogenerate
+	cd src/$(APPLICATION_NAME)/db_postgres && alembic revision --autogenerate
 
 open_db:  ##@Database Open database inside docker-image
 	docker exec -it db psql -d $(POSTGRES_DB) -U $(POSTGRES_USER)
@@ -70,7 +70,7 @@ test:  ##@Testing Test application with pytest
 	make db && $(TEST)
 
 test-cov:  ##@Testing Test application with pytest and create coverage report
-	make db && $(TEST) --cov=$(APPLICATION_NAME) --cov-report html --cov-fail-under=70
+	make db && $(TEST) --cov=src/$(APPLICATION_NAME) --cov-report html --cov-fail-under=70
 
 clean:  ##@Code Clean directory from garbage files
 	rm -fr *.egg-info dist
