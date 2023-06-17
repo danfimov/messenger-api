@@ -30,3 +30,4 @@ api_logs.txt
 .coverage
 /htmlcov/
 .mypy_cache/
+.env
